@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sound_layout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1"
+    android:columnCount="7"
+    android:rowCount="38"
+    android:background="@drawable/stars">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_row="0"
+        android:layout_column="5"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/left_panel"
+            android:orientation="vertical"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/center_panel"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.01">
+
+            <ImageView
+                android:id="@+id/ship_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:foregroundGravity="center" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/right_panel"
+            android:orientation="vertical"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"></LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/icon_panel"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="37"
+        android:layout_column="5"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/target_lock"
+            android:background="@drawable/target_lock"
+            android:tag="target_lock"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="playSoundFromFamily"
+            android:hapticFeedbackEnabled="true"/>
+        <Button
+            android:id="@+id/torpedo"
+            android:background="@drawable/torpedo"
+            android:tag="torpedo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="playSoundFromFamily"
+            android:hapticFeedbackEnabled="true"/>
+        <Button
+            android:id="@+id/shield_out"
+            android:tag="shield_out"
+            android:background="@drawable/shield_out"
+            android:onClick="playSoundFromFamily"
+            android:hapticFeedbackEnabled="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <Button
+            android:id="@+id/damage"
+            android:tag="damage"
+            android:background="@drawable/hit"
+            android:onClick="playSoundFromFamily"
+            android:hapticFeedbackEnabled="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <Button
+            android:id="@+id/explosion"
+            android:tag="explosion"
+            android:background="@drawable/death"
+            android:onClick="playSoundFromFamily"
+            android:hapticFeedbackEnabled="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+    </LinearLayout>
+</GridLayout>

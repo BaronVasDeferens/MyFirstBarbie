@@ -1,0 +1,17 @@
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/std_button"
+    android:layout_width="270dp"
+    android:layout_height="60dp"
+    android:padding="10dp"
+    android:gravity="right"
+
+    android:textColor="#FFFFFF"
+    android:textSize="30sp"
+
+    android:background="@drawable/button_shape_attack"
+    android:shadowColor="#A8A8A8"
+    android:shadowDx="0"
+    android:shadowDy="0"
+    android:shadowRadius="5">
+
+</Button>

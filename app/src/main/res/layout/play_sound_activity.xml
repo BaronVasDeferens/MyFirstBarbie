@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SoundPlayerActivity">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/stars">
+
+        <GridLayout
+            android:id="@+id/top_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridLayout>
+
+        <GridLayout
+            android:id="@+id/bottom_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
