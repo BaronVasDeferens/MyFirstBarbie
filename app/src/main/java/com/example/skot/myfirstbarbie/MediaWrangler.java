@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class MediaWrangler {
 
-
     //private static HashMap<String, MediaPlayer> soundMap = null;
     private static HashMap<String, Integer> fieldMap = null;
     private static List<String> soundNames;
