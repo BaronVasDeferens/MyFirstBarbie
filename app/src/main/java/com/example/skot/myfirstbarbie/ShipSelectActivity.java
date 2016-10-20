@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +33,6 @@ public class ShipSelectActivity extends AppCompatActivity {
 
         // Set up mediaPlayer for handling the soundtrack, button presses
         buttonSelectedSound = MediaWrangler.getSound("select");
-
         availableTrackNames = MediaWrangler.getSoundFamilyNames("soundtrack");
         currentBGMselction = 0;
         currentBGM = MediaWrangler.getSound(availableTrackNames.get(currentBGMselction));
@@ -81,13 +81,14 @@ public class ShipSelectActivity extends AppCompatActivity {
     }
 
     // PLAY/PAUSE: plays or pauses the current music track
-    public void playPause(View v) {
+    public void playPause(final View v) {
 
         if (currentBGM.isPlaying()) {
             currentBGM.pause();
         }
-        else
+        else {
             currentBGM.start();
+        }
     }
 
     // NEXT TRACK: advances to the next track

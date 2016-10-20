@@ -24,12 +24,15 @@ public class SoundPlayerActivity extends AppCompatActivity {
     List<String> allSoundNames;
     List<MediaPlayer> mediaPlayers;
 
+    MediaPlayer shipSelectSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_layout);
+
+
 
         // Capture intent and ship related info
         Intent intent = getIntent();
@@ -44,13 +47,17 @@ public class SoundPlayerActivity extends AppCompatActivity {
         // Find matching ship picture in @drawable
         int id = getResources().getIdentifier(shipId, "drawable","com.example.skot.myfirstbarbie");         // this does the reverse lookup!!!
         Bitmap image = BitmapFactory.decodeResource(getResources(), id);
-        if (image != null)
-            centerPic.setImageBitmap(Bitmap.createScaledBitmap(image,400,400, false));
+        if (image != null) {
+            centerPic.setImageBitmap(Bitmap.createScaledBitmap(image, 400, 400, false));
+        }
 
         // Round up all the sounds associated with the selected ship
+        // Load sounds
+        mediaWrangler = MediaWrangler.getMediaWranglerInstance();
+        // Get ship select sound
+        shipSelectSound = mediaWrangler.getSound("select");
 
         // Create sound library
-        mediaWrangler = MediaWrangler.getMediaWranglerInstance();
         allSoundNames = mediaWrangler.getAllSoundNames();
         mediaPlayers = new ArrayList<>();
 
@@ -147,6 +154,11 @@ public class SoundPlayerActivity extends AppCompatActivity {
 
             m.start();
         }
+    }
+
+    public void backToSelect (View v) {
+        shipSelectSound.start();
+        this.finish();
     }
 
 }
