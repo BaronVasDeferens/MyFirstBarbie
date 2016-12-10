@@ -8,13 +8,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Skot on 7/7/2016.
  */
 public class MediaWrangler {
 
-    //private static HashMap<String, MediaPlayer> soundMap = null;
     private static HashMap<String, Integer> fieldMap = null;
     private static List<String> soundNames;
     private static MediaWrangler mediaWranglerInstance = null;
@@ -23,6 +23,8 @@ public class MediaWrangler {
     private static Field[] fields;
 
     private MediaWrangler() { }
+
+    public static MediaPlayer BGMPlayer;
 
 
     // GET MEDIA WRANGLER INSTANCE
@@ -66,6 +68,15 @@ public class MediaWrangler {
             }
         }
 
+        BGMPlayer = getSound(getSoundFamilyNames("soundtrack").get(0));
+        BGMPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer = MediaWrangler.getNextRandomSoundtrack();
+                mediaPlayer.start();
+            }
+        });
+
         initialized = true;
     }
 
@@ -89,6 +100,13 @@ public class MediaWrangler {
         }
 
         return returnList;
+    }
+
+    public static MediaPlayer getNextRandomSoundtrack() {
+
+        Random rando = new Random();
+        BGMPlayer = getSound(getSoundFamilyNames("soundtrack").get(rando.nextInt(getSoundFamilyNames("soundtrack").size())));
+        return BGMPlayer;
     }
 
 }

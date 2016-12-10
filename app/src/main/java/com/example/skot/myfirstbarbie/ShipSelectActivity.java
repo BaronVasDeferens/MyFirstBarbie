@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.List;
 
 public class ShipSelectActivity extends AppCompatActivity {
@@ -21,8 +27,11 @@ public class ShipSelectActivity extends AppCompatActivity {
     MediaPlayer currentBGM;
     List<String> availableTrackNames;
     int currentBGMselction = 0;
-
-
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -31,7 +40,7 @@ public class ShipSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ship_select_activity);
 
-        // Set up mediaPlayer for handling the soundtrack, button presses
+        // Set up mediaPlayer for handling the soundtrack, button press sounds
         buttonSelectedSound = MediaWrangler.getSound("select");
         availableTrackNames = MediaWrangler.getSoundFamilyNames("soundtrack");
         currentBGMselction = 0;
@@ -69,6 +78,9 @@ public class ShipSelectActivity extends AppCompatActivity {
         b.setImageBitmap(Bitmap.createScaledBitmap(image, 200, 200, false));
         b.setTag(ShipID.slave_one);
         buttonArea.addView(b);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -85,8 +97,7 @@ public class ShipSelectActivity extends AppCompatActivity {
 
         if (currentBGM.isPlaying()) {
             currentBGM.pause();
-        }
-        else {
+        } else {
             currentBGM.start();
         }
     }
@@ -99,17 +110,18 @@ public class ShipSelectActivity extends AppCompatActivity {
         }
 
         currentBGM.release();
-
-        currentBGMselction++;
-        Log.i("nextTrack", "is " + currentBGMselction);
-
-        if (currentBGMselction > availableTrackNames.size() - 1) {
-            currentBGMselction = 0;
-            Log.i("nextTrack", "is " + currentBGMselction);
-        }
-
-        currentBGM = MediaWrangler.getSound(availableTrackNames.get(currentBGMselction));
-        updateSongText(availableTrackNames.get(currentBGMselction));
+//
+//        currentBGMselction++;
+//        Log.i("nextTrack", "is " + currentBGMselction);
+//
+//        if (currentBGMselction > availableTrackNames.size() - 1) {
+//            currentBGMselction = 0;
+//            Log.i("nextTrack", "is " + currentBGMselction);
+//        }
+//
+//        currentBGM = MediaWrangler.getSound(availableTrackNames.get(currentBGMselction));
+//        updateSongText(availableTrackNames.get(currentBGMselction));
+        currentBGM = MediaWrangler.getNextRandomSoundtrack();
         currentBGM.start();
     }
 
@@ -130,4 +142,39 @@ public class ShipSelectActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("ShipSelect Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
 }
