@@ -20,12 +20,14 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.List;
+import java.util.Random;
 
 public class ShipSelectActivity extends AppCompatActivity {
 
     MediaPlayer buttonSelectedSound;
     MediaPlayer currentBGM;
     List<String> availableTrackNames;
+    static Random rando;
     int currentBGMselction = 0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -43,7 +45,8 @@ public class ShipSelectActivity extends AppCompatActivity {
         // Set up mediaPlayer for handling the soundtrack, button press sounds
         buttonSelectedSound = MediaWrangler.getSound("select");
         availableTrackNames = MediaWrangler.getSoundFamilyNames("soundtrack");
-        currentBGMselction = 0;
+        rando = new Random();
+        currentBGMselction = rando.nextInt(availableTrackNames.size());
         currentBGM = MediaWrangler.getSound(availableTrackNames.get(currentBGMselction));
         updateSongText(availableTrackNames.get(currentBGMselction));
 
@@ -119,9 +122,16 @@ public class ShipSelectActivity extends AppCompatActivity {
 //            Log.i("nextTrack", "is " + currentBGMselction);
 //        }
 //
-//        currentBGM = MediaWrangler.getSound(availableTrackNames.get(currentBGMselction));
-//        updateSongText(availableTrackNames.get(currentBGMselction));
-        currentBGM = MediaWrangler.getNextRandomSoundtrack();
+
+        if (availableTrackNames.isEmpty())
+            availableTrackNames = MediaWrangler.getSoundFamilyNames("soundtrack");
+
+
+        currentBGMselction = rando.nextInt(availableTrackNames.size());
+        String currentBGMTrackName = availableTrackNames.get(currentBGMselction);
+        currentBGM = MediaWrangler.getSound(currentBGMTrackName);
+        availableTrackNames.remove(currentBGMselction);
+        updateSongText(currentBGMTrackName);
         currentBGM.start();
     }
 

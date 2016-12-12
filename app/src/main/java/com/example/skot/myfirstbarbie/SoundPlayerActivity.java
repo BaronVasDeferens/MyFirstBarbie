@@ -30,7 +30,7 @@ public class SoundPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sound_layout);
+        setContentView(R.layout.test_layout);
 
 
 
@@ -41,14 +41,18 @@ public class SoundPlayerActivity extends AppCompatActivity {
         // Find layout
         LinearLayout attackGroup = (LinearLayout)findViewById(R.id.right_panel);
         LinearLayout moveGroup = (LinearLayout)findViewById(R.id.left_panel);
-        FrameLayout centerPanel = (FrameLayout)findViewById(R.id.center_panel);
+        LinearLayout centerPanel = (LinearLayout) findViewById(R.id.center_panel);
         ImageView centerPic = (ImageView)findViewById(R.id.ship_view);
+
+        //attackGroup.removeAllViews();
+        //moveGroup.removeAllViews();
+
 
         // Find matching ship picture in @drawable
         int id = getResources().getIdentifier(shipId, "drawable","com.example.skot.myfirstbarbie");         // this does the reverse lookup!!!
         Bitmap image = BitmapFactory.decodeResource(getResources(), id);
         if (image != null) {
-            centerPic.setImageBitmap(Bitmap.createScaledBitmap(image, 400, 400, false));
+            centerPic.setImageBitmap(Bitmap.createScaledBitmap(image, 330, 330, false));
         }
 
         // Round up all the sounds associated with the selected ship
@@ -66,17 +70,22 @@ public class SoundPlayerActivity extends AppCompatActivity {
             if (snd.contains(shipId)) {
 
                 Button b;
-                int btnId = R.layout.std_button_attack;
 
-                if (snd.contains("fire")) {
-                    btnId = R.layout.std_button_attack;
-                }
+                b = new Button(this);
+                b.setTextSize(15);
 
-                else if (snd.contains("flyby")) {
-                    btnId = R.layout.std_button_flyby;
-                }
 
-                b = (Button) getLayoutInflater().inflate(btnId, null);
+//                int btnId = R.layout.std_button_attack;
+//
+//                if (snd.contains("fire")) {
+//                    btnId = R.layout.std_button_attack;
+//                }
+//
+//                else if (snd.contains("flyby")) {
+//                    btnId = R.layout.std_button_flyby;
+//                }
+
+//                b = (Button) getLayoutInflater().inflate(btnId, null);
                 b.setText(snd.replace("_", " "));
                 b.setTextColor(Color.WHITE);
                 b.setTag(snd);
